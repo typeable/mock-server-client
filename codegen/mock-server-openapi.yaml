@@ -36,7 +36,7 @@ paths:
           content:
             application/json:
               schema:
-                description: "list of upserted expectations"
+                title: list of upserted expectations
                 type: array
                 additionalProperties: false
                 items:
@@ -63,7 +63,7 @@ paths:
           content:
             application/json:
               schema:
-                description: "list of upserted expectations"
+                title: list of upserted expectations
                 type: array
                 additionalProperties: false
                 items:
@@ -89,15 +89,6 @@ paths:
           description: expectations and recorded requests cleared
         '400':
           description: incorrect request format
-      parameters:
-        - in: query
-          name: type
-          schema:
-            type: string
-            enum: ["all", "log", "expectations"]
-            default: "all"
-          required: false
-          description: specifies the type of information to clear, default if not specified is "all", supported values are "all", "log", "expectations"
       requestBody:
         content:
           application/json:
@@ -125,14 +116,12 @@ paths:
           schema:
             type: string
             enum: [ "java", "json", "log_entries" ]
-          required: false
           description: changes response format, default if not specificed is "json", supported values are "java", "json", "log_entries"
         - in: query
           name: type
           schema:
             type: string
             enum: [ "logs", "requests", "request_responses", "recorded_expectations", "active_expectations" ]
-          required: false
           description: specifies the type of object that is retrieve, default if not specified is "requests", supported values are "logs", "requests", "recorded_expectations", "active_expectations"
       responses:
         '200':
@@ -148,11 +137,7 @@ paths:
                   - type: array
                     additionalProperties: false
                     items:
-                      $ref: "#/components/schemas/HttpRequest"
-                  - type: array
-                    additionalProperties: false
-                    items:
-                      $ref: "#/components/schemas/HttpRequestAndHttpResponse"
+                      $ref: "#/components/schemas/HttpResponse"
             application/java:
               schema:
                 type: string
@@ -272,7 +257,7 @@ paths:
 components:
   schemas:
     Expectations:
-      description: "list of expectations"
+      title: "list of expectations"
       oneOf:
         - $ref: "#/components/schemas/Expectation"
         - type: array
@@ -280,7 +265,7 @@ components:
           items:
             $ref: "#/components/schemas/Expectation"
     Expectation:
-      description: "expectation"
+      title: "expectation"
       type: object
       additionalProperties: false
       properties:
@@ -290,6 +275,8 @@ components:
           type: integer
         httpRequest:
           $ref: "#/components/schemas/RequestDefinition"
+        openAPIDefinition:
+          $ref: "#/components/schemas/OpenAPIDefinition"
         httpResponse:
           $ref: "#/components/schemas/HttpResponse"
         httpResponseTemplate:
@@ -314,29 +301,8 @@ components:
           $ref: "#/components/schemas/Times"
         timeToLive:
           $ref: "#/components/schemas/TimeToLive"
-      oneOf:
-        - required:
-            - httpResponse
-        - required:
-            - httpResponseTemplate
-        - required:
-            - httpResponseClassCallback
-        - required:
-            - httpResponseObjectCallback
-        - required:
-            - httpForward
-        - required:
-            - httpForwardTemplate
-        - required:
-            - httpForwardClassCallback
-        - required:
-            - httpForwardObjectCallback
-        - required:
-            - httpOverrideForwardedRequest
-        - required:
-            - httpError
     ExpectationId:
-      description: "pointer to existing expectation"
+      title: "pointer to existing expectation"
       type: object
       additionalProperties: false
       properties:
@@ -345,7 +311,7 @@ components:
       required:
         - id
     OpenAPIExpectations:
-      description: "list of open api expectations"
+      title: "list of open api expectations"
       oneOf:
         - $ref: "#/components/schemas/OpenAPIExpectation"
         - type: array
@@ -353,7 +319,7 @@ components:
           items:
             $ref: "#/components/schemas/OpenAPIExpectation"
     OpenAPIExpectation:
-      description: "open api or swagger expectation"
+      title: "open api or swagger expectation"
       type: object
       additionalProperties: false
       properties:
@@ -368,12 +334,12 @@ components:
       required:
         - specUrlOrPayload
     RequestDefinition:
-      description: "request definition"
+      title: "request definition"
       oneOf:
         - $ref: "#/components/schemas/HttpRequest"
         - $ref: "#/components/schemas/OpenAPIDefinition"
     HttpRequest:
-      description: "request properties matcher"
+      title: "request properties matcher"
       type: object
       additionalProperties: false
       properties:
@@ -398,7 +364,7 @@ components:
         socketAddress:
           $ref: "#/components/schemas/SocketAddress"
     OpenAPIDefinition:
-      description: "open api or swagger request matcher"
+      title: "open api or swagger request matcher"
       type: object
       additionalProperties: false
       properties:
@@ -407,7 +373,7 @@ components:
         operationId:
           type: string
     HttpResponse:
-      description: "response to return"
+      title: "response to return"
       type: object
       additionalProperties: false
       properties:
@@ -426,7 +392,7 @@ components:
         reasonPhrase:
           type: string
     HttpTemplate:
-      description: "template to generate response / request"
+      title: "template to generate response / request"
       type: object
       additionalProperties: false
       properties:
@@ -440,7 +406,7 @@ components:
         template:
           type: string
     HttpForward:
-      description: "host and port to forward to"
+      title: host and port to forward to
       type: object
       additionalProperties: false
       properties:
@@ -455,7 +421,7 @@ components:
             - HTTP
             - HTTPS
     HttpClassCallback:
-      description: "class callback"
+      title: class callback
       type: object
       additionalProperties: false
       properties:
@@ -464,7 +430,7 @@ components:
         callbackClass:
           type: string
     HttpObjectCallback:
-      description: "object / method callback"
+      title: object / method callback
       type: object
       additionalProperties: false
       properties:
@@ -475,7 +441,7 @@ components:
         responseCallback:
           type: boolean
     HttpOverrideForwardedRequest:
-      description: "override forwarded request"
+      title: override forwarded request
       oneOf:
         - type: object
           additionalProperties: false
@@ -577,7 +543,7 @@ components:
             httpResponse:
               "$ref": "#/components/schemas/HttpResponse"
     HttpError:
-      description: "error behaviour"
+      title: error behaviour
       type: object
       additionalProperties: false
       properties:
@@ -588,7 +554,7 @@ components:
         responseBytes:
           type: string
     Times:
-      description: "number of responses"
+      title: "number of responses"
       type: object
       additionalProperties: false
       properties:
@@ -597,7 +563,7 @@ components:
         unlimited:
           type: boolean
     TimeToLive:
-      description: "time expectation is valid for"
+      title: "time expectation is valid for"
       type: object
       additionalProperties: false
       properties:
@@ -687,7 +653,7 @@ components:
           #   "^\\S+$":
           #     $ref: "#/components/schemas/StringOrJsonSchema"
     StringOrJsonSchema:
-      description: "string value that can be support nottable, optional or a json schema"
+      title: string value that can be support nottable, optional or a json schema
       oneOf:
         - type: string
         - type: object
@@ -718,7 +684,7 @@ components:
                 - PIPE_DELIMITED
                 - DEEP_OBJECT
     SocketAddress:
-      description: "remote address to send request to, only used for request overrides"
+      title: remote address to send request to
       type: object
       additionalProperties: false
       properties:
@@ -730,198 +696,234 @@ components:
           enum:
             - HTTP
             - HTTPS
+    BinaryBodyMatcher:
+      type: object
+      description: "binary body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - BINARY
+        base64Bytes:
+          type: string
+        contentType:
+          type: string
+    JsonBodyMatcher:
+      type: object
+      description: "json body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - JSON
+        json:
+          type: string
+        contentType:
+          type: string
+        matchType:
+          enum:
+            - STRICT
+            - ONLY_MATCHING_FIELDS
+    RawJsonBodyMatcher:
+      type: object
+      description: "json matching fields body matcher"
+      additionalProperties: true
+    JsonSchemaBodyMatcher:
+      type: object
+      description: "json schema body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - JSON_SCHEMA
+        jsonSchema:
+          $ref: http://json-schema.org/draft-04/schema
+    JsonPathBodyMatcher:
+      type: object
+      description: "JSON path body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - JSON_PATH
+        jsonPath:
+          type: string
+    ParameterBodyMatcher:
+      type: object
+      description: "parameter body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - PARAMETERS
+        parameters:
+          $ref: "#/components/schemas/KeyToMultiValue"
+    RegexBodyMatcher:
+      type: object
+      description: "regex body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - REGEX
+        regex:
+          type: string
+    StringBodyMatcher:
+      type: object
+      description: "string body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - STRING
+        string:
+          type: string
+        contentType:
+          type: string
+        subString:
+          type: boolean
+    RawStringBodyMatcher:
+      type: string
+      description: "substring body matcher"
+    XmlBodyMatcher:
+      type: object
+      description: "xml body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - XML
+        xml:
+          type: string
+        contentType:
+          type: string
+    XmlSchemaBodyMatcher:
+      type: object
+      description: "xml schema body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - XML_SCHEMA
+        xmlSchema:
+          type: string
+    XpathBodyMatcher:
+      type: object
+      description: "xpath body matcher"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - XPATH
+        xpath:
+          type: string
     Body:
       description: "request body matcher"
       anyOf:
-        - type: object
-          description: "binary body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - BINARY
-            base64Bytes:
-              type: string
-            contentType:
-              type: string
-        - type: object
-          description: "json body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - JSON
-            json:
-              type: string
-            contentType:
-              type: string
-            matchType:
-              enum:
-                - STRICT
-                - ONLY_MATCHING_FIELDS
-        - type: object
-          description: "json matching fields body matcher"
-          additionalProperties: true
-        - type: object
-          description: "json schema body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - JSON_SCHEMA
-            jsonSchema:
-              $ref: http://json-schema.org/draft-04/schema
-        - type: object
-          description: "JSON path body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - JSON_PATH
-            jsonPath:
-              type: string
-        - type: object
-          description: "parameter body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - PARAMETERS
-            parameters:
-              $ref: "#/components/schemas/KeyToMultiValue"
-        - type: object
-          description: "regex body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - REGEX
-            regex:
-              type: string
-        - type: object
-          description: "string body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - STRING
-            string:
-              type: string
-            contentType:
-              type: string
-            subString:
-              type: boolean
-        - type: string
-          description: "substring body matcher"
-        - type: object
-          description: "xml body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - XML
-            xml:
-              type: string
-            contentType:
-              type: string
-        - type: object
-          description: "xml schema body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - XML_SCHEMA
-            xmlSchema:
-              type: string
-        - type: object
-          description: "xpath body matcher"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - XPATH
-            xpath:
-              type: string
+        - $ref: "#/components/schemas/BinaryBodyMatcher"
+        - $ref: "#/components/schemas/JsonBodyMatcher"
+        - $ref: "#/components/schemas/RawJsonBodyMatcher"
+        - $ref: "#/components/schemas/JsonSchemaBodyMatcher"
+        - $ref: "#/components/schemas/JsonPathBodyMatcher"
+        - $ref: "#/components/schemas/ParameterBodyMatcher"
+        - $ref: "#/components/schemas/RegexBodyMatcher"
+        - $ref: "#/components/schemas/StringBodyMatcher"
+        - $ref: "#/components/schemas/RawStringBodyMatcher"
+        - $ref: "#/components/schemas/XmlBodyMatcher"
+        - $ref: "#/components/schemas/XmlSchemaBodyMatcher"
+        - $ref: "#/components/schemas/XpathBodyMatcher"
+    BinaryBodyResponse:
+      type: object
+      description: "binary response body"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - BINARY
+        base64Bytes:
+          type: string
+        contentType:
+          type: string
+    JsonResponseBody:
+      type: object
+      description: "json response body"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - JSON
+        json:
+          type: string
+        contentType:
+          type: string
+    RawJsonResponseBody:
+      type: object
+      description: "json response body"
+      additionalProperties: true
+    StringResponseBody:
+      type: object
+      description: "string response body"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - STRING
+        string:
+          type: string
+        contentType:
+          type: string
+    RawStringResponseBody:
+      type: string
+      description: "string response body"
+    XmlResponseBody:
+      type: object
+      description: "xml response body"
+      additionalProperties: false
+      properties:
+        not:
+          type: boolean
+        type:
+          enum:
+            - XML
+        xml:
+          type: string
+        contentType:
+          type: string
     BodyWithContentType:
       description: "response body"
       anyOf:
-        - type: object
-          description: "binary response body"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - BINARY
-            base64Bytes:
-              type: string
-            contentType:
-              type: string
-        - type: object
-          description: "json response body"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - JSON
-            json:
-              type: string
-            contentType:
-              type: string
-        - type: object
-          description: "json response body"
-          additionalProperties: true
-        - type: object
-          description: "string response body"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - STRING
-            string:
-              type: string
-            contentType:
-              type: string
-        - type: string
-          description: "string response body"
-        - type: object
-          description: "xml response body"
-          additionalProperties: false
-          properties:
-            not:
-              type: boolean
-            type:
-              enum:
-                - XML
-            xml:
-              type: string
-            contentType:
-              type: string
+        - $ref: "#/components/schemas/BinaryBodyResponse"
+        - $ref: "#/components/schemas/JsonResponseBody"
+        - $ref: "#/components/schemas/RawJsonResponseBody"
+        - $ref: "#/components/schemas/StringResponseBody"
+        - $ref: "#/components/schemas/RawStringResponseBody"
+        - $ref: "#/components/schemas/XmlResponseBody"
     Delay:
       description: "response delay"
       type: object
@@ -963,11 +965,6 @@ components:
           $ref: "#/components/schemas/VerificationTimes"
         maximumNumberOfRequestToReturnInVerificationFailure:
           type: integer
-      oneOf:
-        - required:
-            - expectationId
-        - required:
-            - httpRequest
     VerificationTimes:
       description: "number of request to verify"
       type: object
@@ -993,11 +990,6 @@ components:
             $ref: "#/components/schemas/RequestDefinition"
         maximumNumberOfRequestToReturnInVerificationFailure:
           type: integer
-      oneOf:
-        - required:
-            - expectationIds
-        - required:
-            - httpRequests
     Ports:
       description: "list of ports"
       type: object
@@ -1007,14 +999,3 @@ components:
           items:
             type: number
           type: array
-    HttpRequestAndHttpResponse:
-      description: "request and response"
-      type: object
-      additionalProperties: false
-      properties:
-        httpRequest:
-          $ref: "#/components/schemas/HttpRequest"
-        httpResponse:
-          $ref: "#/components/schemas/HttpResponse"
-        timestamp:
-          type: string
