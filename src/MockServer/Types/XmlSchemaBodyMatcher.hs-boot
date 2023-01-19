@@ -1,0 +1,14 @@
+module MockServer.Types.XmlSchemaBodyMatcher where
+import Data.Aeson
+import qualified Data.Aeson as Data.Aeson.Types.Internal
+import qualified MockServer.Common
+data XmlSchemaBodyMatcher
+instance Show XmlSchemaBodyMatcher
+instance Eq XmlSchemaBodyMatcher
+instance FromJSON XmlSchemaBodyMatcher
+instance ToJSON XmlSchemaBodyMatcher
+data XmlSchemaBodyMatcherType
+instance Show XmlSchemaBodyMatcherType
+instance Eq XmlSchemaBodyMatcherType
+instance FromJSON XmlSchemaBodyMatcherType
+instance ToJSON XmlSchemaBodyMatcherType

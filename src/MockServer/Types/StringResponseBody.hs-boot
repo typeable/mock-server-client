@@ -1,0 +1,14 @@
+module MockServer.Types.StringResponseBody where
+import Data.Aeson
+import qualified Data.Aeson as Data.Aeson.Types.Internal
+import qualified MockServer.Common
+data StringResponseBody
+instance Show StringResponseBody
+instance Eq StringResponseBody
+instance FromJSON StringResponseBody
+instance ToJSON StringResponseBody
+data StringResponseBodyType
+instance Show StringResponseBodyType
+instance Eq StringResponseBodyType
+instance FromJSON StringResponseBodyType
+instance ToJSON StringResponseBodyType

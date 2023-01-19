@@ -1,0 +1,10 @@
+module MockServer.Types.RequestDefinition where
+import Data.Aeson
+import qualified Data.Aeson as Data.Aeson.Types.Internal
+import qualified MockServer.Common
+data RequestDefinitionVariants
+instance Show RequestDefinitionVariants
+instance Eq RequestDefinitionVariants
+instance FromJSON RequestDefinitionVariants
+instance ToJSON RequestDefinitionVariants
+type RequestDefinition = RequestDefinitionVariants

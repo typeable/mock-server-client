@@ -1,0 +1,11 @@
+{
+  "url": "https://github.com/Haskell-OpenAPI-Code-Generator/Haskell-OpenAPI-Client-Code-Generator.git",
+  "rev": "d3e9c7db4d8b15de9136007a9b9519a7bd8e2199",
+  "date": "2022-04-19T08:54:57+02:00",
+  "path": "/nix/store/086zcd4vdxgck2r1prkc8gbr8h572akf-Haskell-OpenAPI-Client-Code-Generator-d3e9c7d",
+  "sha256": "17db2bypz2p7kil6xpvlh6vgz4bb1drc3ci9p62810xr5bd34a6d",
+  "fetchLFS": false,
+  "fetchSubmodules": false,
+  "deepClone": false,
+  "leaveDotGit": false
+}

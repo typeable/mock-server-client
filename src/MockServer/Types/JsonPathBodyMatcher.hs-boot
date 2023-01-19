@@ -1,0 +1,14 @@
+module MockServer.Types.JsonPathBodyMatcher where
+import Data.Aeson
+import qualified Data.Aeson as Data.Aeson.Types.Internal
+import qualified MockServer.Common
+data JsonPathBodyMatcher
+instance Show JsonPathBodyMatcher
+instance Eq JsonPathBodyMatcher
+instance FromJSON JsonPathBodyMatcher
+instance ToJSON JsonPathBodyMatcher
+data JsonPathBodyMatcherType
+instance Show JsonPathBodyMatcherType
+instance Eq JsonPathBodyMatcherType
+instance FromJSON JsonPathBodyMatcherType
+instance ToJSON JsonPathBodyMatcherType

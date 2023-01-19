@@ -1,0 +1,85 @@
+cabal-version: 1.12
+
+name:           mock-server-client
+version:        0.1.0.0
+build-type:     Simple
+
+library
+  exposed-modules:
+      MockServer
+      MockServer.Operations.Put_mockserver_bind
+      MockServer.Operations.Put_mockserver_clear
+      MockServer.Operations.Put_mockserver_expectation
+      MockServer.Operations.Put_mockserver_openapi
+      MockServer.Operations.Put_mockserver_reset
+      MockServer.Operations.Put_mockserver_retrieve
+      MockServer.Operations.Put_mockserver_status
+      MockServer.Operations.Put_mockserver_stop
+      MockServer.Operations.Put_mockserver_verify
+      MockServer.Operations.Put_mockserver_verifySequence
+      MockServer.Types
+      MockServer.TypeAlias
+      MockServer.Types.BinaryBodyMatcher
+      MockServer.Types.BinaryBodyResponse
+      MockServer.Types.Body
+      MockServer.Types.BodyWithContentType
+      MockServer.Types.ConnectionOptions
+      MockServer.Types.Delay
+      MockServer.Types.Expectation
+      MockServer.Types.ExpectationId
+      MockServer.Types.Expectations
+      MockServer.Types.HttpClassCallback
+      MockServer.Types.HttpError
+      MockServer.Types.HttpForward
+      MockServer.Types.HttpObjectCallback
+      MockServer.Types.HttpOverrideForwardedRequest
+      MockServer.Types.HttpRequest
+      MockServer.Types.HttpResponse
+      MockServer.Types.HttpTemplate
+      MockServer.Types.JsonBodyMatcher
+      MockServer.Types.JsonPathBodyMatcher
+      MockServer.Types.JsonResponseBody
+      MockServer.Types.JsonSchemaBodyMatcher
+      MockServer.Types.KeyToMultiValue
+      MockServer.Types.KeyToValue
+      MockServer.Types.OpenAPIDefinition
+      MockServer.Types.OpenAPIExpectation
+      MockServer.Types.OpenAPIExpectations
+      MockServer.Types.ParameterBodyMatcher
+      MockServer.Types.Ports
+      MockServer.Types.RegexBodyMatcher
+      MockServer.Types.RequestDefinition
+      MockServer.Types.SocketAddress
+      MockServer.Types.StringBodyMatcher
+      MockServer.Types.StringOrJsonSchema
+      MockServer.Types.StringResponseBody
+      MockServer.Types.TimeToLive
+      MockServer.Types.Times
+      MockServer.Types.Verification
+      MockServer.Types.VerificationSequence
+      MockServer.Types.VerificationTimes
+      MockServer.Types.XmlBodyMatcher
+      MockServer.Types.XmlResponseBody
+      MockServer.Types.XmlSchemaBodyMatcher
+      MockServer.Types.XpathBodyMatcher
+      MockServer.Configuration
+      MockServer.SecuritySchemes
+      MockServer.Common
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , text
+    , ghc-prim
+    , http-conduit
+    , http-client
+    , http-types
+    , bytestring
+    , aeson
+    , unordered-containers
+    , vector
+    , scientific
+    , time
+    , mtl
+    , transformers
+  default-language: Haskell2010

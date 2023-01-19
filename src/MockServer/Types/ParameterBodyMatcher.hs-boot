@@ -1,0 +1,14 @@
+module MockServer.Types.ParameterBodyMatcher where
+import Data.Aeson
+import qualified Data.Aeson as Data.Aeson.Types.Internal
+import qualified MockServer.Common
+data ParameterBodyMatcher
+instance Show ParameterBodyMatcher
+instance Eq ParameterBodyMatcher
+instance FromJSON ParameterBodyMatcher
+instance ToJSON ParameterBodyMatcher
+data ParameterBodyMatcherType
+instance Show ParameterBodyMatcherType
+instance Eq ParameterBodyMatcherType
+instance FromJSON ParameterBodyMatcherType
+instance ToJSON ParameterBodyMatcherType

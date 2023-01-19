@@ -1,0 +1,10 @@
+module MockServer.Types.OpenAPIExpectations where
+import Data.Aeson
+import qualified Data.Aeson as Data.Aeson.Types.Internal
+import qualified MockServer.Common
+data OpenAPIExpectationsVariants
+instance Show OpenAPIExpectationsVariants
+instance Eq OpenAPIExpectationsVariants
+instance FromJSON OpenAPIExpectationsVariants
+instance ToJSON OpenAPIExpectationsVariants
+type OpenAPIExpectations = OpenAPIExpectationsVariants
