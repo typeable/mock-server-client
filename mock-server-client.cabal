@@ -76,6 +76,7 @@ library
     , http-types
     , bytestring
     , aeson
+    , openapi3
     , unordered-containers
     , vector
     , scientific
@@ -83,3 +84,4 @@ library
     , mtl
     , transformers
   default-language: Haskell2010
+  default-extensions: DeriveGeneric

@@ -6,20 +6,19 @@
 -- | Contains the types generated from the schema StringOrJsonSchema
 module MockServer.Types.StringOrJsonSchema where
 
-import qualified Prelude as GHC.Integer.Type
-import qualified Prelude as GHC.Maybe
 import qualified Control.Monad.Fail
 import qualified Data.Aeson
 import qualified Data.Aeson as Data.Aeson.Encoding.Internal
 import qualified Data.Aeson as Data.Aeson.Types
 import qualified Data.Aeson as Data.Aeson.Types.FromJSON
-import qualified Data.Aeson as Data.Aeson.Types.ToJSON
 import qualified Data.Aeson as Data.Aeson.Types.Internal
+import qualified Data.Aeson as Data.Aeson.Types.ToJSON
 import qualified Data.ByteString.Char8
 import qualified Data.ByteString.Char8 as Data.ByteString.Internal
 import qualified Data.Foldable
 import qualified Data.Functor
 import qualified Data.Maybe
+import Data.OpenApi.Internal (Schema)
 import qualified Data.Scientific
 import qualified Data.Text
 import qualified Data.Text.Internal
@@ -32,11 +31,12 @@ import qualified GHC.Show
 import qualified GHC.Types
 import qualified MockServer.Common
 import MockServer.TypeAlias
-import {-# SOURCE #-} MockServer.Types.Http__JsonSchema_OrgDraft_04Schema
+import qualified Prelude as GHC.Integer.Type
+import qualified Prelude as GHC.Maybe
 
 -- | Defines the object schema located at @components.schemas.StringOrJsonSchema.oneOf@ in the specification.
--- 
--- 
+--
+--
 data StringOrJsonSchemaOneOf2 = StringOrJsonSchemaOneOf2 {
   -- | not
   stringOrJsonSchemaOneOf2Not :: (GHC.Maybe.Maybe GHC.Types.Bool)
@@ -45,7 +45,7 @@ data StringOrJsonSchemaOneOf2 = StringOrJsonSchemaOneOf2 {
   -- | parameterStyle
   , stringOrJsonSchemaOneOf2ParameterStyle :: (GHC.Maybe.Maybe StringOrJsonSchemaOneOf2ParameterStyle)
   -- | schema
-  , stringOrJsonSchemaOneOf2Schema :: (GHC.Maybe.Maybe Http___json_schema'org_draft_04_schema)
+  , stringOrJsonSchemaOneOf2Schema :: (GHC.Maybe.Maybe Schema)
   -- | value
   , stringOrJsonSchemaOneOf2Value :: (GHC.Maybe.Maybe Data.Text.Internal.Text)
   } deriving (GHC.Show.Show

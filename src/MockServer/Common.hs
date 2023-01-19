@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
@@ -33,12 +34,18 @@ where
 import qualified Control.Monad.IO.Class as MIO
 import qualified Control.Monad.Reader as MR
 import qualified Control.Monad.Trans.Class as MT
+#if MIN_VERSION_aeson(2,0,0)
+import qualified Data.Aeson.KeyMap as KeyMap
+import qualified Data.Aeson.Key as Key
+import Data.Bifunctor
+#else
+import qualified Data.HashMap.Strict as HashMap
+#endif
 import qualified Data.Aeson as Aeson
 import qualified Data.Aeson.Encoding as Encoding
 import qualified Data.Bifunctor as BF
 import qualified Data.ByteString.Char8 as B8
 import qualified Data.ByteString.Lazy.Char8 as LB8
-import qualified Data.HashMap.Strict as HMap
 import qualified Data.Maybe as Maybe
 import qualified Data.Scientific as Scientific
 import Data.Text (Text)
@@ -49,6 +56,15 @@ import qualified Data.Vector as Vector
 import qualified Network.HTTP.Client as HC
 import qualified Network.HTTP.Simple as HS
 import qualified Network.HTTP.Types as HT
+
+
+#if MIN_VERSION_aeson(2,0,0)
+toList' :: Aeson.Object -> [(Text, Aeson.Value)]
+toList' = fmap (first Key.toText) . KeyMap.toList
+#else
+toList' :: Aeson.Object -> [(Text, Aeson.Value)]
+toList' = HashMap.toList
+#endif
 
 -- | Abstracts the usage of 'Network.HTTP.Simple.httpBS' away,
 --  so that it can be used for testing
@@ -285,8 +301,10 @@ jsonToFormDataFlat _ Aeson.Null = []
 jsonToFormDataFlat name (Aeson.Number a) = [(name, encodeStrict a)]
 jsonToFormDataFlat name (Aeson.String a) = [(name, textToByte a)]
 jsonToFormDataFlat name (Aeson.Bool a) = [(name, encodeStrict a)]
-jsonToFormDataFlat _ (Aeson.Object object) = HMap.toList object >>= uncurry jsonToFormDataFlat . BF.first Just
-jsonToFormDataFlat name (Aeson.Array vector) = Vector.toList vector >>= jsonToFormDataFlat name
+jsonToFormDataFlat _ (Aeson.Object object) =
+  toList' object >>= uncurry jsonToFormDataFlat . BF.first Just
+jsonToFormDataFlat name (Aeson.Array vector) =
+  Vector.toList vector >>= jsonToFormDataFlat name
 
 -- | creates form data bytestring array
 createFormData :: (Aeson.ToJSON a) => a -> [(B8.ByteString, B8.ByteString)]
@@ -320,9 +338,9 @@ jsonToFormDataPrefixed prefix (Aeson.Bool False) = [(prefix, "false")]
 jsonToFormDataPrefixed _ Aeson.Null = []
 jsonToFormDataPrefixed prefix (Aeson.String a) = [(prefix, a)]
 jsonToFormDataPrefixed "" (Aeson.Object object) =
-  HMap.toList object >>= uncurry jsonToFormDataPrefixed
+  toList' object >>= uncurry jsonToFormDataPrefixed
 jsonToFormDataPrefixed prefix (Aeson.Object object) =
-  HMap.toList object >>= (\(x, y) -> jsonToFormDataPrefixed (prefix <> "[" <> x <> "]") y)
+  toList' object >>= (\(x, y) -> jsonToFormDataPrefixed (prefix <> "[" <> x <> "]") y)
 jsonToFormDataPrefixed prefix (Aeson.Array vector) =
   Vector.toList vector >>= jsonToFormDataPrefixed (prefix <> "[]")
 
