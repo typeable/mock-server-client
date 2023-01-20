@@ -43,16 +43,16 @@ main = do
 ### The `codegen` dir
 
 * `regen.sh` is the simple script to regenerate the whole package.
-* `shell.nix` a shell in which the `regen.sh` calls the `openapi3-code-generator` to regenerate the
-* `mock-server-openapi-5.13.x-swagger.yaml` not the original file as you might
-  think. The thing is that the `openapi3-code-generator` does not support all
-  the features of the OpenAPI3 standard correctly, so it is
-  hand-postprocessed. It was originally downloaded from [here](https://app.swaggerhub.com/apis/jamesdbloom/mock-server-openapi/5.13.x) and fixed.
+* `shell.nix` a shell in which the `regen.sh` calls the `openapi3-code-generator` to regenerate the code
+* `mock-server-openapi.yaml` not the [original specification](https://app.swaggerhub.com/apis/jamesdbloom/mock-server-openapi) of the `mock-server` as you might
+  think. The thing is that the `openapi3-code-generator` does not support all the features of the
+  OpenAPI3 standard correctly, so it is hand-postprocessed. It was originally downloaded from
+  [here](https://app.swaggerhub.com/apis/jamesdbloom/mock-server-openapi/5.13.x) and fixed.
 
 ### Other
 
-* `src` contails the generted code, but not exactly. Some of the parts of the
-  generted code was not very pleasant, so it was fixed too.
+* `src` and `mock-server-client.cabal` contain the generted code, but not exactly. Some of the parts
+  of the generted code was not very pleasant, so it was fixed too.
 
 ## What will happen if you just call the `regen.sh`?
 
@@ -60,9 +60,9 @@ It will build the `openapi3-code-generator` in `nix` and regenerate the whole
 Haskell source code. You will see that the code was changed, because as
 mentioned earlier the original code was slightly modified, so watch your commits.
 
-## How the to update the package to the new version of the `mock-server`?
+## How to update the package to the new version of the `mock-server` spec?
 
-* Commit all changes
+* Commit or discard all changes
 * `git checkout update-openapi-spec`
 * Replace the `codegen/mock-server-openapi.yaml` with a newer version
 * `git commit -m "updated mock-server-openapi.yaml to version $NEWVERSION"`
