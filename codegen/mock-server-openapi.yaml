@@ -4,7 +4,7 @@ servers:
   - url: 'https://localhost:1080/'
 info:
   title: MockServer API
-  version: 5.13.x
+  version: 5.15.x
   description: >-
     MockServer enables easy mocking of any system you integrate with via HTTP or HTTPS with clients written in Java, JavaScript and Ruby and a simple REST API (as shown below).
 
@@ -18,7 +18,7 @@ info:
     name: Apache 2.0
 tags:
   - name: expectation
-    description: Create or update expectations - updates if the id matches an existing expecations (only supported by MockServer)
+    description: Create or update expectations - updates if the id matches an existing expectations (only supported by MockServer)
   - name: verify
     description: Verify requests (both MockServer & MockServer Proxy)
   - name: control
@@ -96,7 +96,7 @@ paths:
               oneOf:
                 - $ref: "#/components/schemas/RequestDefinition"
                 - $ref: "#/components/schemas/ExpectationId"
-        description: request used to match expectations and recored requests to clear
+        description: request used to match expectations and record requests to clear
   /mockserver/reset:
     put:
       tags:
@@ -116,7 +116,7 @@ paths:
           schema:
             type: string
             enum: [ "java", "json", "log_entries" ]
-          description: changes response format, default if not specificed is "json", supported values are "java", "json", "log_entries"
+          description: changes response format, default if not specified is "json", supported values are "java", "json", "log_entries"
         - in: query
           name: type
           schema:
@@ -363,6 +363,8 @@ components:
           $ref: "#/components/schemas/KeyToValue"
         socketAddress:
           $ref: "#/components/schemas/SocketAddress"
+        protocol:
+          $ref: "#/components/schemas/Protocol"
     OpenAPIDefinition:
       title: "open api or swagger request matcher"
       type: object
@@ -837,6 +839,11 @@ components:
             - XPATH
         xpath:
           type: string
+    Protocol:
+      description: "protocol matcher"
+      enum:
+        - HTTP_1_1
+        - HTTP_2
     Body:
       description: "request body matcher"
       anyOf:
