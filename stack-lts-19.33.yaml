@@ -1,0 +1,9 @@
+resolver: lts-19.33
+# Put installed binaries into ./bin instead of $HOME/.local/bin
+
+nix:
+  packages:
+    - zlib
+
+packages:
+  - .
