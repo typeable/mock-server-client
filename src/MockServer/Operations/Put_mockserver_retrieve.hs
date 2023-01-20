@@ -62,7 +62,7 @@ put_mockserver_retrieve parameters
 data Put_mockserver_retrieveParameters = Put_mockserver_retrieveParameters {
   -- | queryFormat: Represents the parameter named \'format\'
   -- 
-  -- changes response format, default if not specificed is \"json\", supported values are \"java\", \"json\", \"log_entries\"
+  -- changes response format, default if not specified is \"json\", supported values are \"java\", \"json\", \"log_entries\"
   put_mockserver_retrieveParametersQueryFormat :: (GHC.Maybe.Maybe Put_mockserver_retrieveParametersQueryFormat)
   -- | queryType: Represents the parameter named \'type\'
   -- 
@@ -83,7 +83,7 @@ mkPut_mockserver_retrieveParameters = Put_mockserver_retrieveParameters{put_mock
 -- 
 -- Represents the parameter named \'format\'
 -- 
--- changes response format, default if not specificed is \"json\", supported values are \"java\", \"json\", \"log_entries\"
+-- changes response format, default if not specified is \"json\", supported values are \"java\", \"json\", \"log_entries\"
 data Put_mockserver_retrieveParametersQueryFormat =
    Put_mockserver_retrieveParametersQueryFormatOther Data.Aeson.Types.Internal.Value -- ^ This case is used if the value encountered during decoding does not match any of the provided cases in the specification.
   | Put_mockserver_retrieveParametersQueryFormatTyped Data.Text.Internal.Text -- ^ This constructor can be used to send values to the server which are not present in the specification yet.

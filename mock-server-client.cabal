@@ -47,6 +47,7 @@ library
       MockServer.Types.OpenAPIExpectations
       MockServer.Types.ParameterBodyMatcher
       MockServer.Types.Ports
+      MockServer.Types.Protocol
       MockServer.Types.RegexBodyMatcher
       MockServer.Types.RequestDefinition
       MockServer.Types.SocketAddress

@@ -42,6 +42,7 @@ module MockServer (
   module MockServer.Types.OpenAPIExpectations,
   module MockServer.Types.ParameterBodyMatcher,
   module MockServer.Types.Ports,
+  module MockServer.Types.Protocol,
   module MockServer.Types.RegexBodyMatcher,
   module MockServer.Types.RequestDefinition,
   module MockServer.Types.SocketAddress,
@@ -102,6 +103,7 @@ import MockServer.Types.OpenAPIExpectation
 import MockServer.Types.OpenAPIExpectations
 import MockServer.Types.ParameterBodyMatcher
 import MockServer.Types.Ports
+import MockServer.Types.Protocol
 import MockServer.Types.RegexBodyMatcher
 import MockServer.Types.RequestDefinition
 import MockServer.Types.SocketAddress
