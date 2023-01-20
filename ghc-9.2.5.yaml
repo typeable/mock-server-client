@@ -1,0 +1,8 @@
+resolver: lts-20.8
+
+nix:
+  packages:
+    - zlib
+
+packages:
+  - .

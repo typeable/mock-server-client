@@ -1,0 +1,8 @@
+resolver: lts-19.33
+
+nix:
+  packages:
+    - zlib
+
+packages:
+  - .
